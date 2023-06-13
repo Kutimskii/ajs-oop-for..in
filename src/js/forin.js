@@ -7,8 +7,10 @@ export default function sortObj(object, arr) {
     delete copyObj[el];
   });
 
-  for (const [key, value] of Object.entries(copyObj)) {
-    temp.push({ key, value });
+  for (const key in copyObj) {
+    if (Object.getOwnPropertyDescriptor(copyObj, key)) {
+      temp.push({ key, value: copyObj[key] });
+    }
   }
   temp.sort((a, b) => (a.key > b.key ? 1 : -1));
 
